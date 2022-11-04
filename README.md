@@ -13,7 +13,6 @@
 Create file ".env" containing :
 - MARIADB_ROOT_PASSWORD=dbRootPassword
 - MARIADB_DATABASE=DBname
-- MARIADB_CHARSET=UTF8
 - MARIADB_USER=userName
 - MARIADB_PASSWORD=userPassword
 
