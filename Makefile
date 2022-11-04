@@ -64,7 +64,5 @@ goapp:
 	@echo "*** Dev Applications started ***"
 
 test:
-	#mytest :=
-	@echo "Enter a text : "
-	@read -p "text : " MYTEST \
+	@read -p "Enter text : " MYTEST \
 	&& echo $${MYTEST}
