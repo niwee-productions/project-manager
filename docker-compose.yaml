@@ -1,0 +1,100 @@
+version: '3.3'
+
+services:
+  nginx:
+    image: nginx:latest
+    restart: "unless-stopped"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+
+  DB:
+    image: mariadb:latest
+    #container_name: infra-DB
+    restart: on-failure
+    volumes:
+      - "./sql:/docker-entrypoint-initdb.d"
+      - "DB:/var/lib/mariadb"
+    expose:
+      - "3306"
+    env_file:
+      - "./.env"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysql",
+          "-u'${MARIADB_USER}'",
+          "-p'${MARIADB_PASSWORD}'",
+          "-e",
+          "SELECT 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  node_installer:
+    image: "node:16"
+    restart: "no"
+    command: "yarn install"
+    volumes:
+      - "./frontend:/app"
+    ports:
+      - "3000:3000"
+
+  node_builder:
+    image: "node:16"
+    restart: "no"
+    command: "yarn build"
+    working_dir: "/app"
+    volumes:
+      - "./frontend:/app"
+    ports:
+      - "3000:3000"
+    depends_on:
+      node_installer:
+        condition: "service_completed_successfully"
+
+  node_watcher:
+    image: "node:16"
+    restart: on-failure
+    command: "yarn dev"
+    working_dir: "/app"
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./frontend:/app"
+    depends_on:
+      node_builder:
+        condition: "service_completed_successfully"
+
+  php:
+    depends_on:
+      - DB
+    links:
+      - DB
+    build: "./dockerfiles/php-file"
+    volumes:
+      - "./backend:/var/www/html/backend"
+    expose:
+      - "9000"
+    env_file:
+      - "./.env"
+
+  phpmyadmin:
+    image: "phpmyadmin:fpm"
+    restart: on-failure
+    depends_on:
+      - DB
+    links:
+      - DB
+    expose:
+      - "8080"
+    env_file:
+      - "./.env"
+
+volumes:
+  DB:
