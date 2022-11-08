@@ -1,8 +1,10 @@
 include ./.env
 
+DC := "docker compose"
+
 start:
 	@echo "*** Start containers ***"
-	@docker compose up
+	$DC up
 
 stop:
 	@docker compose stop

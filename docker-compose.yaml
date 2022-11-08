@@ -1,9 +1,13 @@
-version: '3.3'
+version: '3.9'
 
 services:
   nginx:
     image: nginx:latest
     restart: "unless-stopped"
+    links:
+      - php
+    volumes_from:
+      - php
     ports:
       - "80:80"
       - "443:443"
@@ -40,10 +44,10 @@ services:
     image: "node:16"
     restart: "no"
     command: "yarn install"
+    working_dir: "/app"
+    user: "node"
     volumes:
       - "./frontend:/app"
-    ports:
-      - "3000:3000"
 
   node_builder:
     image: "node:16"
@@ -52,8 +56,6 @@ services:
     working_dir: "/app"
     volumes:
       - "./frontend:/app"
-    ports:
-      - "3000:3000"
     depends_on:
       node_installer:
         condition: "service_completed_successfully"
@@ -63,10 +65,10 @@ services:
     restart: on-failure
     command: "yarn dev"
     working_dir: "/app"
-    ports:
-      - "3000:3000"
     volumes:
       - "./frontend:/app"
+    ports:
+      - "3000:3000"
     depends_on:
       node_builder:
         condition: "service_completed_successfully"
@@ -78,7 +80,7 @@ services:
       - DB
     build: "./dockerfiles/php-file"
     volumes:
-      - "./backend:/var/www/html/backend"
+      - "./backend:/var/www/html"
     expose:
       - "9000"
     env_file:
