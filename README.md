@@ -3,8 +3,8 @@
 ### Content :
 - *Docker configuration*
 - *Nginx server configuration*
-- *front end sources*
-- *back end sources*
+- *front-end sources*
+- *back-end sources*
 
 ### Data base : mariaDB
 
@@ -16,4 +16,7 @@ Create file ".env" containing :
 - MARIADB_USER=userName
 - MARIADB_PASSWORD=userPassword
 
-Create directory "sql" containing your .sql file to load the DB
+Create directory "sql" in main directory containing .sql file to load the DB
+
+Add your Makefile in main directory
+

@@ -39,7 +39,6 @@ services:
       timeout: 5s
       retries: 5
 
-
   node_installer:
     image: "node:16"
     restart: "no"
@@ -53,6 +52,7 @@ services:
     image: "node:16"
     restart: "no"
     command: "yarn build"
+    user: "node"
     working_dir: "/app"
     volumes:
       - "./frontend:/app"
@@ -64,6 +64,7 @@ services:
     image: "node:16"
     restart: on-failure
     command: "yarn dev"
+    user: "node"
     working_dir: "/app"
     volumes:
       - "./frontend:/app"
