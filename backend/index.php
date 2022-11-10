@@ -20,7 +20,6 @@ class Index
         $this->router = new Router();
 
         $this->router->get('/api/test', function () {
-//            echo "Coucou";
             $text = ["text" => "coucou depuis l'api"];
             echo json_encode($text, JSON_UNESCAPED_UNICODE);
         });
@@ -28,6 +27,13 @@ class Index
         $this->router->run();
     }
 
+    private function respond(string $message, int $status, array $data)
+    {
+        return json_encode([ // Je vous laisse faire la suite ;)
+        ]);
+    }
+
 }
 
 $index = new Index();
+
