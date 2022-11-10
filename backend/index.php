@@ -21,18 +21,23 @@ class Index
 
         $this->router->get('/api/test', function () {
             $text = ["text" => "coucou depuis l'api"];
-            echo json_encode($text, JSON_UNESCAPED_UNICODE);
+
+            echo $this->respond("Test", 0, $text);
+        });
+
+        $this->router->post('/api/test', function () {
+            $text = ["text" => "Post depuis l'api"];
+
+            echo $this->respond("Test", 0, $text);
         });
 
         $this->router->run();
     }
 
-    private function respond(string $message, int $status, array $data)
+    private function respond(string $message, int $status, array $data): string
     {
-        return json_encode([ // Je vous laisse faire la suite ;)
-        ]);
+        return json_encode($data, JSON_UNESCAPED_UNICODE);
     }
-
 }
 
 $index = new Index();
