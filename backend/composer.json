@@ -1,0 +1,20 @@
+{
+    "name": "niwee/project_manager",
+    "autoload": {
+        "psr-4": {
+            "Niwee\\ProjectManager\\": "./",
+            "Niwee\\ProjectManager\\Model\\": "Model/",
+            "Niwee\\ProjectManager\\Controller\\": "Controller/",
+            "Niwee\\ProjectManager\\Interface\\": "Interface/"
+        }
+    },
+    "authors": [
+        {
+            "name": "BruForm",
+            "email": "bpayet.gsm@free.fr"
+        }
+    ],
+    "require": {
+        "bramus/router": "~1.6"
+    }
+}
