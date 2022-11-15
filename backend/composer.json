@@ -1,20 +1,23 @@
 {
-    "name": "niwee/project_manager",
-    "autoload": {
-        "psr-4": {
-            "Niwee\\ProjectManager\\": "./",
-            "Niwee\\ProjectManager\\Model\\": "Model/",
-            "Niwee\\ProjectManager\\Controller\\": "Controller/",
-            "Niwee\\ProjectManager\\Interface\\": "Interface/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Niwee",
-            "email": "niwee@gmail.com"
-        }
-    ],
-    "require": {
-        "bramus/router": "~1.6"
+  "name": "niwee/project_manager",
+  "autoload": {
+    "psr-4": {
+      "Niwee\\ProjectManager\\": "./",
+      "Niwee\\ProjectManager\\Model\\": "Model/",
+      "Niwee\\ProjectManager\\Controller\\": "Controller/",
+      "Niwee\\ProjectManager\\Interface\\": "Interface/"
     }
+  },
+  "authors": [
+    {
+      "name": "Niwee",
+      "email": "niwee@gmail.com"
+    }
+  ],
+  "require": {
+    "bramus/router": "~1.6",
+    "ext-pdo": "*",
+    "catfan/medoo": "^2.1",
+    "filp/whoops": "^2.14"
+  }
 }
