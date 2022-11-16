@@ -34,9 +34,10 @@ class Index
 
     public function setRoutes(): void
     {
-        // GET => api/specialty
-        $pattern = '/api(/\w+)?(/\d+)?';
-        $this->router->get($pattern, function ($table, $id) {
+        // GET => api/specialty[/id]
+//        $pattern = '/api(/\w+)?(/\d+)?';
+//        $this->router->get($pattern, function (string $table, $id) {
+        $this->router->get('/api/specialty(/\d+)?', function ($id) {
 
 //          \d+ = One or more digits (0-9)
 //          \w+ = One or more word characters (a-z 0-9 _)
@@ -44,27 +45,46 @@ class Index
 //          .* = Any character (including /), zero or more
 //          [^/]+ = Any character but /, one or more
 
-            if ($table != 'specialty') {
-                $status = 2;
-                $data = ["Table de recherche inconnue"];
-            } else {
-                $specialty = new Specialty();
-                if (!$id) {
+            $specialty = new Specialty();
+            if (!$id) {
 //                    $tabRet = selectAll(htmlentities($table));
-                    $tabRet = $specialty->selectAll();
-                } else {
+                $tabRet = $specialty->selectAll();
+            } else {
 //                    $tabRet = selectById(htmlentities($table), htmlentities($id));
-                    $tabRet = $specialty->selectById($id);
-                }
+                $tabRet = $specialty->selectById(htmlentities($id));
+            }
 //                $status = $tabRet[0];
 //                $ret = $tabRet[1];
-                $ret = $tabRet;
+            $ret = $tabRet;
 
-                $data = [$table => $ret];
+            $data = ["specialty" => $ret];
 
-                $status = 0;
-            }
+            $status = 0;
+
             return $this->respond($status, $data);
+        });
+
+        // POST => post/specialty/name/short_name/description
+//        $this->router->post('api/specialty/(\w+)/(\w+)/(\w+)', function ($name, $short_name, $description) {
+        $this->router->post('api/specialty', function () {
+
+            $name = $_POST['name'] ?? "";
+            $short_name = $_POST['short_name'] ?? "";
+            $description = $_POST['description'] ?? ""; 
+
+            $specialty = new Specialty();
+            $specialty->insert(htmlentities($name), htmlentities($short_name), htmlentities($description));
+        });
+
+        // PUT => post/specialty/id/name/short_name/description
+        $this->router->put('api/specialty/(\d+)(/\w+)(/\w+)(/\w+)', function ($id, $name, $short_name, $description) {
+            // Fake $_PUT
+            $_PUT = array();
+            parse_str(file_get_contents('php://input'), $_PUT);
+            print_r($_PUT);
+
+//            $specialty = new Specialty();
+//            $specialty->insert($name, $short_name, htmlentities($description));
         });
     }
 

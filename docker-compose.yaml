@@ -86,15 +86,18 @@ services:
     env_file:
       - "./.env"
 
+#image: "phpmyadmin:fpm"
   phpmyadmin:
-    image: "phpmyadmin:fpm"
+    image: "phpmyadmin"
     restart: on-failure
     depends_on:
       - DB
     links:
       - DB
-    expose:
-      - "8080"
+    ports:
+      - "8080:80"
+#    expose:
+#      - "8080"
     env_file:
       - "./.env"
 
