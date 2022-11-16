@@ -16,7 +16,6 @@ services:
 
   DB:
     image: mariadb:latest
-    #container_name: infra-DB
     restart: on-failure
     volumes:
       - "./sql:/docker-entrypoint-initdb.d"
