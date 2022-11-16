@@ -21,14 +21,14 @@ class Database extends Medoo
 
     }
     // , array $columns, array $where
-    public function selectAll(string $table): array
+    public function selectAll(string $table, array $columns): array
     {
-        return $this->select($table, "*");
+        return $this->select($table, $columns, []);
     }
 
-    public function selectById(string $table, int $id): array
+    public function selectById(string $table, int $id, array $columns): array
     {
-        return $this->select($table, "*", [
+        return $this->select($table, $columns, [
             "id[=]" => $id,
         ]);
     }

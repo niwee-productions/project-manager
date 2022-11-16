@@ -35,7 +35,8 @@ class Index
     public function setRoutes(): void
     {
         // GET => api/specialty
-        $this->router->get('/api(/\w+)?(/\d+)?', function ($table, $id) {
+        $pattern = '/api(/\w+)?(/\d+)?';
+        $this->router->get($pattern, function ($table, $id) {
 
 //          \d+ = One or more digits (0-9)
 //          \w+ = One or more word characters (a-z 0-9 _)
@@ -43,20 +44,17 @@ class Index
 //          .* = Any character (including /), zero or more
 //          [^/]+ = Any character but /, one or more
 
-            if (!$table) {
+            if ($table != 'specialty') {
                 $status = 2;
-                die($this->respond($status, []));
+                $data = ["Table de recherche inconnue"];
             } else {
-//                $specialty = new Specialty();
-                $db = new Database();
+                $specialty = new Specialty();
                 if (!$id) {
 //                    $tabRet = selectAll(htmlentities($table));
-//                    $tabRet = $specialty->selectAll();
-                    $tabRet = $db->selectAll($table);
+                    $tabRet = $specialty->selectAll();
                 } else {
 //                    $tabRet = selectById(htmlentities($table), htmlentities($id));
-//                    $tabRet = $specialty->selectById($id);
-                    $tabRet = $db->selectById($table, $id);
+                    $tabRet = $specialty->selectById($id);
                 }
 //                $status = $tabRet[0];
 //                $ret = $tabRet[1];
@@ -65,35 +63,8 @@ class Index
                 $data = [$table => $ret];
 
                 $status = 0;
-                return $this->respond($status, $data);
             }
-        });
-
-        // GET => api/test
-        $this->router->get('/api/test', function () {
-            $status = 0;
-            try {
-                $ret = (new \DateTime('2022/13/14'))->format('Y-m-d H:i:s');
-            } catch (\Exception $e) {
-                $code = $e->getCode();
-                $message = $e->getMessage();
-                $status = 2;
-                $ret = $code . " - " . $message;
-            }
-            $data = ["date" => $ret];
-
-            $res = $this->errors($status);
-
-            return $this->respond($res[0], $data);
-        });
-
-        // POST => api/test
-        $this->router->post('/api/test', function () {
-            $data = ["text" => "Post depuis l'api"];
-
-            $status = 0;
-            $res = $this->errors($status);
-            return $this->respond($res[0], $data);
+            return $this->respond($status, $data);
         });
     }
 
@@ -124,23 +95,6 @@ class Index
         ];
 
         die (json_encode($data));
-    }
-
-    private function errors(int $status): string
-    {
-        switch ($status) {
-            default:
-            case 0:
-                $message = 'OK';
-                break;
-            case 1:
-                $message = 'Warning';
-                break;
-            case 2:
-                $message = 'Error';
-                break;
-        }
-        return $message;
     }
 }
 
