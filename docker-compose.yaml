@@ -29,8 +29,9 @@ services:
         [
           "CMD",
           "mysql",
-          "-u'${MARIADB_USER}'",
-          "-p'${MARIADB_PASSWORD}'",
+          "-u",
+          "${MYSQL_USER}",
+          "-p${MYSQL_PASSWORD}",
           "-e",
           "SELECT 1",
         ]
