@@ -4,16 +4,14 @@ namespace Niwee\ProjectManager;
 
 // Require composer autoloader
 require __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/Controller/bdd.php';
-require_once __DIR__ . '/Model/Database.php';
-require_once __DIR__ . '/Model/Specialty.php';
-require_once __DIR__ . '/Model/Member.php';
-require_once __DIR__ . '/Model/Category.php';
-require_once __DIR__ . '/Model/Local.php';
-require_once __DIR__ . '/Model/Theme.php';
 
 use Bramus\Router\Router;
-use JetBrains\PhpStorm\NoReturn;
+use Exception;
+use Niwee\ProjectManager\Model\Category;
+use Niwee\ProjectManager\Model\Local;
+use Niwee\ProjectManager\Model\Member;
+use Niwee\ProjectManager\Model\Specialty;
+use Niwee\ProjectManager\Model\Theme;
 
 $tables = [
     "specialty" => new Specialty(),
@@ -32,20 +30,41 @@ class Index
 
     public function __construct()
     {
-        // Create Router instance
-        $this->router = new Router();
+        $token = "";
+        foreach (getallheaders() as $name => $value) {
+            if ($name === 'Authorization'){
+                var_dump($name, "VALUE=>" ,$value, "---------------");
+                $token = $value;
+                break;
+            }
+        }
 
-        $whoops = new \Whoops\Run;
-        $whoops->pushHandler(new \Whoops\Handler\JsonResponseHandler);
-        $whoops->register();
+        if($token === "123456789") {
+            // Create Router instance
+            $this->router = new Router();
 
-        $this->setRoutes();
+            $whoops = new \Whoops\Run;
+            $whoops->pushHandler(new \Whoops\Handler\JsonResponseHandler);
+            $whoops->register();
 
-        $this->router->run();
+            $this->setRoutes();
+
+            $this->router->run();
+        }else{
+            $status = 2;
+            $data = ["Access" => "UnAuthorized"];
+            return $this->respond($status, $data);
+        }
     }
 
     public function setRoutes(): void
     {
+        // Custom 404 Handler
+        $this->router->set404(function () {
+            header('HTTP/1.1 404 Not Found');
+            echo '404, route not found!';
+        });
+
         // GET => api/tableName[/id]
         $this->router->get('/api/(\w+)(/\d+)?', function ($table, $id) {
 
@@ -72,10 +91,15 @@ class Index
                 $data = [$table => $ret];
 
                 return $this->respond($status, $data);
-            } catch (\Exception $e){
+            } catch (Exception $e) {
+                if ($e->getCode() === 2) {
+                    $message = ["Unknown table" => $table];
+                } else {
+                    $message = $e->getMessage();
+                }
                 $data = [
                     "code" => $e->getCode(),
-                    "message" => $e->getMessage()
+                    "message" => $message,
                 ];
                 $status = 2;
                 return $this->respond($status, $data);
@@ -94,7 +118,7 @@ class Index
                     ${$table}->update(htmlentities($id), $_POST);
                 }
                 die();
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $data = [
                     "code" => $e->getCode(),
                     "message" => $e->getMessage()

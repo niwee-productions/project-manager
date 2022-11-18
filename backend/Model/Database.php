@@ -1,6 +1,6 @@
 <?php
 
-namespace Niwee\ProjectManager;
+namespace Niwee\ProjectManager\Model;
 
 require './vendor/autoload.php';
 
@@ -19,17 +19,5 @@ class Database extends Medoo
             'password' => $_ENV['MYSQL_PASSWORD']
         ]);
 
-    }
-    // , array $columns, array $where
-    public function selectAll(string $table, array $columns): array
-    {
-        return $this->select($table, $columns, []);
-    }
-
-    public function selectById(string $table, int $id, array $columns): array
-    {
-        return $this->select($table, $columns, [
-            "id[=]" => $id,
-        ]);
     }
 }

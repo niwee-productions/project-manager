@@ -1,6 +1,6 @@
 <?php
 
-namespace Niwee\ProjectManager;
+namespace Niwee\ProjectManager\Model;
 
 class Category
 {

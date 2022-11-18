@@ -11,10 +11,10 @@
 ## WARNING :
 
 Create file ".env" containing :
-- MARIADB_ROOT_PASSWORD=dbRootPassword
-- MARIADB_DATABASE=DBname
-- MARIADB_USER=userName
-- MARIADB_PASSWORD=userPassword
+- MYSQL_ROOT_PASSWORD=dbRootPassword
+- MYSQL_DATABASE=DBname
+- MYSQL_USER=userName
+- MYSQL_PASSWORD=userPassword
 
 Create directory "sql" in main directory containing .sql file to load the DB
 
