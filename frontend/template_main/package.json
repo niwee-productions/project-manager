@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "node-sass": "^8.0.0"
+  },
+  "scripts": {
+    "scss": "sass --watch ./assets/scss/main.scss:./assets/css/main.css",
+    "begin": "if [ ! -d ./node_modules ];then yarn ; fi && if [ ! -d ./dashboard/node_modules ];then cd dashboard ; yarn ; fi"
+  }
+}
