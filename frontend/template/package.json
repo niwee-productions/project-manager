@@ -2,7 +2,7 @@
   "name": "template",
   "version": "1.0.0",
   "description": "",
-  "main": "migration.js",
+  "main": "index.js",
   "dependencies": {
     "abab": "^2.0.6",
     "acorn": "^8.8.1",
