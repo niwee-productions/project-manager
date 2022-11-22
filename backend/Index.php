@@ -30,16 +30,15 @@ class Index
 
     public function __construct()
     {
-        $token = "";
-        foreach (getallheaders() as $name => $value) {
-            if ($name === 'Authorization'){
-                var_dump($name, "VALUE=>" ,$value, "---------------");
-                $token = $value;
-                break;
-            }
-        }
+//        $token = "";
+//        foreach (getallheaders() as $name => $value) {
+//            if ($name === 'Authorization'){
+//                $token = $value;
+//                break;
+//            }
+//        }
 
-        if($token === "123456789") {
+//        if($token === "123456789") {
             // Create Router instance
             $this->router = new Router();
 
@@ -50,11 +49,11 @@ class Index
             $this->setRoutes();
 
             $this->router->run();
-        }else{
-            $status = 2;
-            $data = ["Access" => "UnAuthorized"];
-            return $this->respond($status, $data);
-        }
+//        }else{
+//            $status = 2;
+//            $data = ["Access" => "UnAuthorized"];
+//            return $this->respond($status, $data);
+//        }
     }
 
     public function setRoutes(): void
@@ -67,6 +66,10 @@ class Index
 
         // GET => api/tableName[/id]
         $this->router->get('/api/(\w+)(/\d+)?', function ($table, $id) {
+
+            header("Access-Control-Allow-Origin: *");
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Max-Age: 86400');
 
 //          \d+ = One or more digits (0-9)
 //          \w+ = One or more word characters (a-z 0-9 _)
@@ -109,6 +112,11 @@ class Index
         // POST => api/tableName[/id]
         // Si id renseigné -> Update, sinon -> Insert
         $this->router->post('api/(\w+)(/\d+)?', function ($table, $id) {
+
+            header("Access-Control-Allow-Origin: *");
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Max-Age: 86400');
+
             try {
                 global $tables;
                 ${$table} = $tables[$table];
