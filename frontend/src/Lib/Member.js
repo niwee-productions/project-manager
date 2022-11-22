@@ -9,7 +9,7 @@ export default class Member {
     get(id) {
         return this.api.get("/member/" + id)
             .then(response => {
-                console.log(response);
+                console.log(response.data.data.member);
             })
         // .catch(error => {})
     }

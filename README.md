@@ -12,6 +12,7 @@
 
 Create file ".env" containing :
 - MYSQL_ROOT_PASSWORD=dbRootPassword
+- MYSQL_HOST=DB
 - MYSQL_DATABASE=DBname
 - MYSQL_USER=userName
 - MYSQL_PASSWORD=userPassword

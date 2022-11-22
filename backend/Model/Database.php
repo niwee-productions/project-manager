@@ -2,8 +2,6 @@
 
 namespace Niwee\ProjectManager\Model;
 
-require './vendor/autoload.php';
-
 use Medoo\Medoo;
 
 class Database extends Medoo

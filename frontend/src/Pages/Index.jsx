@@ -35,7 +35,7 @@ export default class Index extends React.Component {
         this.member = new Member();
         this.member.get(1)
             .then(response => {
-                console.log(response);
+                console.log("member.get => OK");
             })
     }
 
