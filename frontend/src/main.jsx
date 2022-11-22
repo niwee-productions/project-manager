@@ -36,7 +36,7 @@ const router = createBrowserRouter(
                 {path: '/contact', element: <Contact/>},
                 {path: '/dashboard', element: <Dashboard/>},
                 {path: '/human-ressource', element: <HumanRessource/>},
-                // {path: '/', element: <Index/>},
+                {path: '/', element: <Index/>},
                 {path: '/mail', element: <Mail/>},
                 {path: '/mail-success', element: <MailSuccess/>},
                 {path: '/not-found', element: <NotFound/>},

@@ -62,6 +62,7 @@ services:
 
   node_watcher:
     image: "node:16"
+    tty: true
     restart: on-failure
     command: "yarn dev"
     user: "node"

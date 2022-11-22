@@ -1,6 +1,8 @@
 /*======================================
 	01. Start Header CSS
 ========================================*/
+@import "variables";
+
 #accueil.header {
   background: transparent;
   position: absolute;
@@ -790,6 +792,7 @@
 .navbar-nav .nav-item a {
   font-size: 15px;
   color: $white;
+  color: $black; //BPAY
   transition: all 0.3s ease-out 0s;
   position: relative;
   padding: 35px 0;
