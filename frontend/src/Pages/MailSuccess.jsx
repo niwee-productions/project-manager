@@ -24,14 +24,6 @@ export default class MailSuccess extends React.Component {
   render() {
     return (
       <div>
-        <div className="preloader">
-          <div className="preloader-inner">
-            <div className="preloader-icon">
-              <span />
-              <span />
-            </div>
-          </div>
-        </div>
         <div className="maill-success">
           <div className="d-table">
             <div className="d-table-cell">

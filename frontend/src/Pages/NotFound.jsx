@@ -24,14 +24,7 @@ export default class NotFound extends React.Component {
   render() {
     return (
       <div>
-        <div className="preloader">
-          <div className="preloader-inner">
-            <div className="preloader-icon">
-              <span />
-              <span />
-            </div>
-          </div>
-        </div>
+
         <div className="error-area">
           <div className="d-table">
             <div className="d-table-cell">

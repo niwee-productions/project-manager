@@ -48,14 +48,6 @@ export default class Index extends React.Component {
     render() {
         return (
             <div>
-                <div className="preloader">
-                    <div className="preloader-inner">
-                        <div className="preloader-icon">
-                            <span/>
-                            <span/>
-                        </div>
-                    </div>
-                </div>
                 <section className="hero-area">
                     <img
                         className="hero-shape"

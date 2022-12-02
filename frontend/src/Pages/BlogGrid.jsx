@@ -24,14 +24,7 @@ export default class BlogGrid extends React.Component {
   render() {
     return (
       <div>
-        <div className="preloader">
-          <div className="preloader-inner">
-            <div className="preloader-icon">
-              <span />
-              <span />
-            </div>
-          </div>
-        </div>
+
         <div className="breadcrumbs">
           <div className="container">
             <div className="row align-items-center">
