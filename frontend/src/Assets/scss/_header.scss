@@ -10,6 +10,48 @@
   left: 0;
   top: 0;
 
+    .header-left {
+      .menu-toggle-btn {
+        .main-btn {
+          padding: 0 15px;
+          height: 46px;
+          line-height: 46px;
+          border-radius: 10px;
+        }
+      }
+
+      .header-search {
+        form {
+          max-width: 270px;
+          position: relative;
+
+          input {
+            width: 100%;
+            border: 1px solid $light;
+            background: rgba($light, 0.5);
+            border-radius: 10px;
+            height: 46px;
+            padding-left: 44px;
+            @include transition(0.3s);
+
+            &:focus {
+              border-color: $primary;
+              background: $white;
+            }
+          }
+          button {
+            position: absolute;
+            border: none;
+            background: transparent;
+            left: 16px;
+            top: 0;
+            height: 46px;
+            color: $gray;
+            font-weight: 700;
+          }
+        }
+      }
+    }
   .header-right {
     width: 100%;
     background: transparent;
@@ -686,15 +728,16 @@
 }
 
 .header .navbar .navbar-nav .nav-item a.active {
-  color: $white;
+  color: $black;
 }
 
 .sticky .navbar .navbar-nav .nav-item a.active {
   color: $theme-color;
 }
 
+
 .sticky .navbar .navbar-nav .nav-item a {
-  color: $black;
+  color: $theme-color;
 }
 
 .header .navbar .navbar-nav .nav-item .sub-menu a.active {

@@ -107,6 +107,11 @@ export default class Header extends React.Component {
                           Contact
                         </Link>
                       </li>
+                      <li className="nav-item">
+                        <Link to="dashboard" >
+                          dashboard
+                        </Link>
+                      </li>
                     </ul>
                   </div>
                   <div className="button">

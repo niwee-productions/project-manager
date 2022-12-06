@@ -2,7 +2,7 @@
 	Footer CSS
 ========================================*/
 .footer {
-    background-color: $black;
+    background-color: $globalBlue;
     position: relative;
     padding-bottom: 0;
 
@@ -101,7 +101,7 @@
             }
         }
 
-        &.f-link {
+        &.f-Link {
             li {
                 display: block;
                 margin-bottom: 15px;

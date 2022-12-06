@@ -26,23 +26,6 @@ export default class AboutUs extends React.Component {
     return (
       <div>
 
-        <div className="breadcrumbs">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-6 offset-lg-3 col-md-12 col-12">
-                <div className="breadcrumbs-content">
-                  <h1 className="page-title">About Us</h1>
-                  <ul className="breadcrumb-nav">
-                    <li>
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li>About Us</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <section className="about section">
           <div className="container">
             <div className="row align-items-center">

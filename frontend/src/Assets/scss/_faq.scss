@@ -3,7 +3,7 @@
 ========================================*/
 .faq {
     padding-bottom: 80px;
-    background-color: $gray;
+    background-color: $globalBlue;
 
     @media #{$xs} {
         .xs-margin {
@@ -13,6 +13,13 @@
 
     .section-title {
         margin-bottom: 60px;
+        color: $white;
+        h3{
+
+        }
+        h2{
+            color: $white;
+        }
 
         @media #{$md} {
             margin-bottom: 40px;

@@ -42,7 +42,6 @@ export default class Index extends React.Component {
     componentDidMount() {
         document.title = 'Home - Outil de gestion de projet'
         new GLightbox({selector: '.glightbox'})
-
     }
 
     render() {
